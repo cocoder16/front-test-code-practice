@@ -53,7 +53,10 @@ dispatch, create action, update store에 대한 유닛 테스트는 무의미. r
 - 유닛의 단위: 컴포넌트, 함수
 - 유닛 테스트 조직화: 준비 - 실행 - 단언
 
-*** 아톰 컴포넌트 유닛 테스트
+*** 컴포넌트 유닛 테스트 
+https://docs.cypress.io/guides/component-testing/introduction#Experimental
+https://www.cypress.io/blog/2021/04/06/cypress-component-testing-react/
+https://github.com/lmiller1990/cypress-react-template
 
 - 컴포넌트 임포트 (준비)
 컴포넌트를 임포트하는 순간 컴포넌트 안에서 서버에 호출하는 코드가 있으면 서버에 리퀘스트를 날려버리기 때문에 실제서버가 동작해버리는데 이것은 문제가 되는지(?)
