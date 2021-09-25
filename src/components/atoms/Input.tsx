@@ -2,10 +2,11 @@ import { useState, useRef } from "react";
 
 type IProps = {
   type: string;
+  name?: string;
   className?: string;
   maxLength?: number;
   autoFocus?: boolean;
-  defaultValue: string;
+  defaultValue: string | number;
   defaultChecked?: boolean;
   onChange?: ({ newValue, newChecked }: InputChangeParameter) => void;
   onPressEnter?: () => void;
@@ -13,6 +14,7 @@ type IProps = {
 
 function Input({
   type,
+  name,
   className,
   maxLength,
   autoFocus,
@@ -21,22 +23,23 @@ function Input({
   onChange,
   onPressEnter,
 }: IProps) {
-  const [value, setValue] = useState<string>(defaultValue);
+  const [value, setValue] = useState<string | number>(defaultValue);
   const isEnterKeyPressing = useRef<boolean>(false);
 
   return (
     <input
       type={type}
+      name={name}
       className={className}
       maxLength={maxLength}
       autoFocus={autoFocus}
       value={value}
       defaultChecked={defaultChecked}
       onChange={(event) => {
-        const isTextInput = type === "text";
+        const shouldSetValue = type === "text" || type === "number";
         const { value: newValue, checked: newChecked } = event.target;
 
-        if (isTextInput) {
+        if (shouldSetValue) {
           setValue(newValue);
         }
         onChange && onChange({ newValue, newChecked });
