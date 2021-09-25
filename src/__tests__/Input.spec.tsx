@@ -38,7 +38,12 @@ describe("Input Interface", () => {
       .type("{enter}")
       .should("have.value", expectedText)
       .and("not.have.value", fullText);
-    cy.get("@changeHandler").should("have.callCount", expectedChangeCount);
+    cy.get("@changeHandler")
+      .should("have.callCount", expectedChangeCount)
+      .and("have.been.calledWith", {
+        newValue: expectedText,
+        newChecked: false,
+      });
     cy.get("@pressEnterHandler").should(
       "have.callCount",
       expectedCallCountOfEnter
@@ -68,9 +73,19 @@ describe("Input Interface", () => {
       .should("have.value", props.defaultValue)
       .and("not.be.checked");
     cy.get("input").check().should("be.checked");
-    cy.get("@changeHandler").should("have.callCount", 1);
+    cy.get("@changeHandler")
+      .should("have.callCount", 1)
+      .and("have.been.calledWith", {
+        newValue: props.defaultValue,
+        newChecked: true,
+      });
     cy.get("input").click().should("be.checked");
-    cy.get("@changeHandler").should("have.callCount", 1);
+    cy.get("@changeHandler")
+      .should("have.callCount", 1)
+      .and("have.been.calledWith", {
+        newValue: props.defaultValue,
+        newChecked: true,
+      });
   });
 
   it("checkbox type Input", () => {
@@ -96,9 +111,19 @@ describe("Input Interface", () => {
       .should("have.value", props.defaultValue)
       .and("not.be.checked");
     cy.get("input").check().should("be.checked");
-    cy.get("@changeHandler").should("have.callCount", 1);
+    cy.get("@changeHandler")
+      .should("have.callCount", 1)
+      .and("have.been.calledWith", {
+        newValue: props.defaultValue,
+        newChecked: true,
+      });
     cy.get("input").click().should("not.be.checked");
-    cy.get("@changeHandler").should("have.callCount", 2);
+    cy.get("@changeHandler")
+      .should("have.callCount", 2)
+      .and("have.been.calledWith", {
+        newValue: props.defaultValue,
+        newChecked: false,
+      });
   });
 
   it("number type Input", () => {
@@ -133,10 +158,65 @@ describe("Input Interface", () => {
       .type("{enter}")
       .should("have.value", expectedNumber)
       .and("not.have.value", appendedNumber);
-    cy.get("@changeHandler").should("have.callCount", expectedChangeCount);
+    cy.get("@changeHandler")
+      .should("have.callCount", expectedChangeCount)
+      .and("have.been.calledWith", {
+        newValue: expectedNumber,
+        newChecked: false,
+      });
     cy.get("@pressEnterHandler").should(
       "have.callCount",
       expectedCallCountOfEnter
     );
+  });
+
+  it("password type Input", () => {
+    const props = {
+      type: "password",
+      maxLength: 10,
+      onChange: cy.stub().as("changeHandler"),
+      onPressEnter: cy.stub().as("pressEnterHandler"),
+    };
+    const password = "abcd1234!@#";
+    const slicedPassword = password.slice(0, props.maxLength);
+    const expectedCallCountOfEnter = 1;
+
+    mount(
+      <Input
+        type={props.type}
+        maxLength={props.maxLength}
+        onChange={props.onChange}
+        onPressEnter={props.onPressEnter}
+      />
+    );
+
+    cy.get("input").and("have.value", "");
+    cy.get("input")
+      .type(password)
+      .type("{enter}")
+      .should("have.value", slicedPassword)
+      .and("not.have.value", password);
+    cy.get("@changeHandler")
+      .should("have.callCount", slicedPassword.length)
+      .and("have.been.calledWith", {
+        newValue: slicedPassword,
+        newChecked: false,
+      });
+    cy.get("@pressEnterHandler").should(
+      "have.callCount",
+      expectedCallCountOfEnter
+    );
+  });
+
+  it("color type Input", () => {
+    const props = {
+      type: "color",
+      // defaultValue, => if want, test this
+    };
+    const defaultColorInputValue = "#000000";
+
+    mount(<Input type={props.type} />);
+
+    cy.get("input").should("have.value", defaultColorInputValue);
   });
 });

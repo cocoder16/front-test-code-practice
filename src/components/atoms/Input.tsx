@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 
 type IProps = {
   type: string;
@@ -6,7 +6,7 @@ type IProps = {
   className?: string;
   maxLength?: number;
   autoFocus?: boolean;
-  defaultValue: string | number;
+  defaultValue?: string | number;
   defaultChecked?: boolean;
   onChange?: ({ newValue, newChecked }: InputChangeParameter) => void;
   onPressEnter?: () => void;
@@ -18,13 +18,13 @@ function Input({
   className,
   maxLength,
   autoFocus,
-  defaultValue,
+  defaultValue = "",
   defaultChecked,
   onChange,
   onPressEnter,
 }: IProps) {
-  const [value, setValue] = useState<string | number>(defaultValue);
   const isEnterKeyPressing = useRef<boolean>(false);
+  const fixedDefaultValue = type === "color" ? "#000000" : defaultValue;
 
   return (
     <input
@@ -33,20 +33,17 @@ function Input({
       className={className}
       maxLength={maxLength}
       autoFocus={autoFocus}
-      value={value}
+      defaultValue={fixedDefaultValue}
       defaultChecked={defaultChecked}
       onChange={(event) => {
-        const shouldSetValue = type === "text" || type === "number";
         const { value: newValue, checked: newChecked } = event.target;
 
-        if (shouldSetValue) {
-          setValue(newValue);
-        }
         onChange && onChange({ newValue, newChecked });
       }}
       onKeyPress={(event) => {
         if (onPressEnter) {
           const isEnterKey = event.code === "Enter";
+
           if (isEnterKey && !isEnterKeyPressing.current) {
             event.preventDefault();
             isEnterKeyPressing.current = true;
@@ -57,6 +54,7 @@ function Input({
       onKeyUp={(event) => {
         if (onPressEnter) {
           const isEnterKey = event.code === "Enter";
+
           if (isEnterKey && isEnterKeyPressing.current) {
             event.preventDefault();
             isEnterKeyPressing.current = false;
