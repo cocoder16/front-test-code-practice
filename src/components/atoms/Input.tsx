@@ -6,7 +6,8 @@ type IProps = {
   maxLength?: number;
   autoFocus?: boolean;
   defaultValue: string;
-  onChange?: (value: string) => void;
+  defaultChecked?: boolean;
+  onChange?: ({ newValue, newChecked }: InputChangeParameter) => void;
   onPressEnter?: () => void;
 };
 
@@ -16,6 +17,7 @@ function Input({
   maxLength,
   autoFocus,
   defaultValue,
+  defaultChecked,
   onChange,
   onPressEnter,
 }: IProps) {
@@ -29,10 +31,15 @@ function Input({
       maxLength={maxLength}
       autoFocus={autoFocus}
       value={value}
+      defaultChecked={defaultChecked}
       onChange={(event) => {
-        const newValue = event.target.value;
-        setValue(newValue);
-        onChange && onChange(newValue);
+        const isTextInput = type === "text";
+        const { value: newValue, checked: newChecked } = event.target;
+
+        if (isTextInput) {
+          setValue(newValue);
+        }
+        onChange && onChange({ newValue, newChecked });
       }}
       onKeyPress={(event) => {
         if (onPressEnter) {

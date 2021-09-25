@@ -3,7 +3,7 @@ import { mount } from "@cypress/react";
 import Input from "src/components/atoms/Input";
 
 describe("Input Interface", () => {
-  it("text type Input props", () => {
+  it("text type Input", () => {
     const props = {
       type: "text",
       maxLength: 5,
@@ -43,5 +43,31 @@ describe("Input Interface", () => {
       "have.callCount",
       expectedCallCountOfEnter
     );
+  });
+
+  it("radio type Input", () => {
+    const props = {
+      type: "radio",
+      defaultValue: "abc",
+      defaultChecked: false,
+      onChange: cy.stub().as("changeHandler"),
+    };
+
+    mount(
+      <Input
+        type={props.type}
+        defaultValue={props.defaultValue}
+        defaultChecked={props.defaultChecked}
+        onChange={props.onChange}
+      />
+    );
+
+    cy.get("input")
+      .should("have.value", props.defaultValue)
+      .and("not.be.checked");
+    cy.get("input").check().should("be.checked");
+    cy.get("@changeHandler").should("have.callCount", 1);
+    cy.get("input").check().should("be.checked");
+    cy.get("@changeHandler").should("have.callCount", 1);
   });
 });
