@@ -54,7 +54,7 @@ dispatch, create action, update store에 대한 유닛 테스트는 무의미. r
 - 유닛 테스트 조직화: 준비 - 실행 - 단언
 
 *** 컴포넌트 유닛 테스트 
-https://docs.cypress.io/guides/component-testing/introduction#Experimental
+https://docs.cypress.io/guides/component-testing/introduction#What-is-Component-Testing
 https://www.cypress.io/blog/2021/04/06/cypress-component-testing-react/
 https://github.com/lmiller1990/cypress-react-template
 
@@ -69,6 +69,10 @@ dummy props를 받는 컴포넌트가 마운트됨.
 
 - 컴포넌트 렌더링 (단언)
 dummy props에 따라 기대되는 렌더링을 테스트한다.
+
+- 인터페이스 테스트 (실행, 단언)
+html태그의 기능을 테스트.(아톰인 경우)
+dummy props들 중 인터페이스 역할을 하는 것들을 스텁하여 호출횟수를 테스트.
 
 - 컴포넌트 언마운트 (실행)
 각 유닛 테스트가 끝날 때마다 컴포넌트는 언마운트 해야한다.
