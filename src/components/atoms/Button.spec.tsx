@@ -1,6 +1,6 @@
 import { mount } from "@cypress/react";
 
-import Button from "src/components/atoms/Button";
+import Button from "./Button";
 
 describe("Button Interface", () => {
   it("Button", () => {

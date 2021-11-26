@@ -1,6 +1,6 @@
 import { mount } from "@cypress/react";
 
-import Input from "src/components/atoms/Input";
+import Input from "./Input";
 
 describe("Input Interface", () => {
   it("text type Input", () => {
