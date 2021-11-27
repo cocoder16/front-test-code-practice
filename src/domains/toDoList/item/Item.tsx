@@ -12,7 +12,7 @@ function Item({ id, order, content, checked }: IProps) {
   const onChange = () => {};
 
   return (
-    <StyledItem order={order}>
+    <StyledItem className="todo-item" order={order}>
       <div>{id}</div>
       <p>{content}</p>
       <Input type="checkbox" defaultChecked={checked} onChange={onChange} />
