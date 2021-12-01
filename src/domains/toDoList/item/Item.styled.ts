@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-type Iprops = {
+interface IProps {
   order: number;
-};
+}
 
-const StyledItem = styled.div<Iprops>`
+const StyledItem = styled.div<IProps>`
   display: flex;
   align-items: center;
   box-sizing: border-box;
