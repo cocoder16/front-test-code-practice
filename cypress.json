@@ -1,5 +1,5 @@
 {
-  "testFiles": ["**/*.spec.js", "**/*.spec.ts"],
+  "testFiles": "**/*.spec.ts",
   "component": {
     "componentFolder": "src",
     "testFiles": ["**/*.spec.tsx", "**/*.spec.ts"]
