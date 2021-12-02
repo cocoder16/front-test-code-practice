@@ -158,6 +158,11 @@ UI셋업(준비)하고 이벤트 발생시키고(실행) (중간에 API 통신 �
 
 *** ajax 테스트 (기능 테스트, 하향식 통합(?))
 
+redux-thunk 테스트 (docs에서는 고립적인 유닛 테스트를 권장하지 않고, 기능 테스트를 권장함.)
+docs: https://ko.redux.js.org/recipes/writing-tests
+We consider thunk behavior to be an implementation detail of the application, 
+and recommend that it be covered by testing the group of components (or whole app) using it, rather than testing the thunk in isolation.
+
 - 개발 순서
 1. 필요한 API, 인터페이스, 콜백함수 명세를 만든다.
 2. 더미 리퀘스트, 리스폰스 데이터 생성

@@ -12,6 +12,10 @@ export const reducer = {
       action.payload.checked;
     return state;
   },
+  getAll: (state: IToDoListState, action: IGetAllAction) => {
+    state.toDoList = action.payload;
+    return state;
+  },
 };
 
 export default createSlice({
