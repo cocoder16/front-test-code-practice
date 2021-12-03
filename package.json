@@ -10,6 +10,7 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-redux": "^7.1.20",
     "@types/styled-components": "^5.1.15",
+    "dotenv": "^10.0.0",
     "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -29,7 +30,8 @@
     "cy:run-ct": "cypress run-ct",
     "test:unit:open": "yarn cy:open-ct",
     "test:unit:run": "yarn cy:run-ct",
-    "test:unit": " yarn test:unit:run && yarn test:unit:open"
+    "test:unit": " yarn test:unit:run && yarn test:unit:open",
+    "test:open": "yarn cy:open"
   },
   "eslintConfig": {
     "extends": [
@@ -53,7 +55,7 @@
     "@cypress/react": "^5.10.0",
     "@cypress/webpack-dev-server": "^1.6.0",
     "@typescript-eslint/parser": "^5.5.0",
-    "cypress": "^8.3.1",
+    "cypress": "^9.1.0",
     "eslint-plugin-chai-friendly": "^0.7.2",
     "eslint-plugin-cypress": "^2.12.1"
   }

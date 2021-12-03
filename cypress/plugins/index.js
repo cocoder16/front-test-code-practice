@@ -23,5 +23,9 @@ module.exports = (on, config) => {
     require("@cypress/react/plugins/react-scripts")(on, config);
   }
 
+  // use process.env
+  require("dotenv").config();
+  config.env = process.env;
+
   return config;
 };
