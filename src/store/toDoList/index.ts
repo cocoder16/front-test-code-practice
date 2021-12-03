@@ -1,5 +1,7 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
 
+import utilReducer from "src/store/utils/reducer";
+
 const updateChecked = createAction<IUpdateCheckedPayload>("UPDATE_CHECKED");
 
 const initialState: IToDoListState = {
@@ -25,9 +27,6 @@ export default createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(updateChecked, reducer.updateChecked)
-      .addDefaultCase((state, action) => {
-        console.error("undefined action type: ", action.type);
-        return state;
-      });
+      .addDefaultCase(utilReducer.unknownType);
   },
 });

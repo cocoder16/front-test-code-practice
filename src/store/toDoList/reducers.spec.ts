@@ -82,5 +82,4 @@ describe("to do list reducers", () => {
   // });
   // TODO: 1) check 클릭했을때 기능 테스트
   // TODO: axios 응답 실패했을때 이후 로직
-  // TODO: addDefaultCase 공통 함수로
 });
