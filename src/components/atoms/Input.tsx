@@ -35,12 +35,14 @@ function Input({
       autoFocus={autoFocus}
       defaultValue={fixedDefaultValue}
       defaultChecked={defaultChecked}
-      onChange={(event) => {
+      onChange={event => {
         const { value: newValue, checked: newChecked } = event.target;
 
-        onChange && onChange({ newValue, newChecked });
+        if (onChange) {
+          onChange({ newValue, newChecked });
+        }
       }}
-      onKeyPress={(event) => {
+      onKeyPress={event => {
         if (onPressEnter) {
           const isEnterKey = event.code === "Enter";
 
@@ -51,7 +53,7 @@ function Input({
           }
         }
       }}
-      onKeyUp={(event) => {
+      onKeyUp={event => {
         if (onPressEnter) {
           const isEnterKey = event.code === "Enter";
 

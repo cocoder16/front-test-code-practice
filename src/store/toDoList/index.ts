@@ -24,7 +24,7 @@ export default createSlice({
   name: "counter",
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
       .addCase(updateChecked, reducer.updateChecked)
       .addDefaultCase(utilReducer.unknownType);
