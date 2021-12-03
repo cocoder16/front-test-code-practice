@@ -5,7 +5,7 @@ function Item({ id, order, content, checked }: ToDo) {
   const onChange = () => {};
 
   return (
-    <StyledItem className="todo-item" order={order}>
+    <StyledItem className="to-do-item" order={order}>
       <div>{id}</div>
       <p>{content}</p>
       <Input type="checkbox" defaultChecked={checked} onChange={onChange} />
