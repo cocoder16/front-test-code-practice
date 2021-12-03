@@ -1,6 +1,6 @@
 import { mount } from "@cypress/react";
 
-import Item from "./Item";
+import Item from ".";
 
 describe("Item component", () => {
   it("render first order Item which have border-top and no checked", () => {
@@ -11,16 +11,9 @@ describe("Item component", () => {
       checked: false,
     };
 
-    mount(
-      <Item
-        id={props.id}
-        order={props.order}
-        content={props.content}
-        checked={props.checked}
-      />
-    );
+    mount(<Item toDo={props} />);
 
-    cy.get(".todo-item").should(
+    cy.get(".to-do-item").should(
       "have.css",
       "border-top",
       "1px solid rgb(0, 0, 0)"
@@ -37,16 +30,9 @@ describe("Item component", () => {
       checked: true,
     };
 
-    mount(
-      <Item
-        id={props.id}
-        order={props.order}
-        content={props.content}
-        checked={props.checked}
-      />
-    );
+    mount(<Item toDo={props} />);
 
-    cy.get(".todo-item").should(
+    cy.get(".to-do-item").should(
       "have.css",
       "border-top",
       "0px none rgb(0, 0, 0)"
@@ -62,16 +48,9 @@ describe("Item component", () => {
       checked: false,
     };
 
-    mount(
-      <Item
-        id={props.id}
-        order={props.order}
-        content={props.content}
-        checked={props.checked}
-      />
-    );
+    mount(<Item toDo={props} />);
 
-    cy.get(".todo-item input[type='checkbox']").as("checkbox").click();
+    cy.get(".to-do-item input[type='checkbox']").as("checkbox").click();
     cy.get("@checkbox").should("be.checked");
   });
 });

@@ -1,7 +1,12 @@
 import Input from "src/components/atoms/Input";
 import StyledItem from "./Item.styled";
 
-function Item({ id, order, content, checked }: ToDo) {
+interface IProps {
+  toDo: ToDo;
+}
+
+function Item({ toDo }: IProps) {
+  const { id, order, content, checked } = toDo;
   const onChange = () => {};
 
   return (
