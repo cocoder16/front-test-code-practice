@@ -11,9 +11,12 @@ function Button({ className, onClick, children }: IProps) {
     <button
       type="button"
       className={`${className} with-icon`}
-      onClick={(event) => {
+      onClick={event => {
         event.preventDefault();
-        onClick && onClick();
+
+        if (onClick) {
+          onClick();
+        }
       }}
     >
       {children}
