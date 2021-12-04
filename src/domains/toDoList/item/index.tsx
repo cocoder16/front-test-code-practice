@@ -1,5 +1,8 @@
+import { useDispatch } from "react-redux";
+
 import StyledItem from "./Item.styled";
 import Input from "src/components/atoms/Input";
+import { action } from "src/store/toDoList";
 
 interface IProps {
   toDo: ToDo;
@@ -7,7 +10,11 @@ interface IProps {
 
 function Item({ toDo }: IProps) {
   const { id, order, content, checked } = toDo;
-  const onChange = () => {};
+  const dispatch = useDispatch();
+
+  const onChange = ({ newChecked }: InputChangeParameter) => {
+    dispatch(action.updateChecked({ id, checked: newChecked as boolean }));
+  };
 
   return (
     <StyledItem className="to-do-item" order={order}>

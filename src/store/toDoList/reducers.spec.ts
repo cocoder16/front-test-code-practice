@@ -56,7 +56,5 @@ describe("to do list reducers", () => {
     );
   });
 
-  // TODO: action type 각 상태에 대해 다 정의를 해놔야할지?
-  // TODO: 1) check 클릭했을때 기능 테스트
   // TODO: axios 응답 실패했을때 이후 로직
 });

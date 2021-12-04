@@ -1,6 +1,5 @@
 import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import utilReducer from "src/store/utils/reducer";
 import service from "src/services/toDoList";
 
 const actionPrefix = "TO_DO_LIST";
@@ -11,8 +10,12 @@ export const action = {
     const response = await service.getAll();
     return response.data;
   }),
-  updateChecked: createAction<IUpdateCheckedPayload>(
-    `${actionPrefix}/UPDATE_CHECKED`
+  updateChecked: createAsyncThunk(
+    `${actionPrefix}/UPDATE_CHECKED`,
+    async (payload: IUpdateCheckedPayload) => {
+      await service.updateChecked(payload);
+      return payload;
+    }
   ),
 };
 
@@ -39,7 +42,7 @@ const toDoListSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(action.getAll.fulfilled, reducer.getAll)
-      .addCase(action.updateChecked, reducer.updateChecked);
+      .addCase(action.updateChecked.fulfilled, reducer.updateChecked);
   },
 });
 
