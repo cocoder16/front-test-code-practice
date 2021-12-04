@@ -1,5 +1,5 @@
-import Input from "src/components/atoms/Input";
 import StyledItem from "./Item.styled";
+import Input from "src/components/atoms/Input";
 
 interface IProps {
   toDo: ToDo;

@@ -24,6 +24,10 @@ interface IUpdateCheckedAction extends Action {
   payload: IUpdateCheckedPayload;
 }
 
+interface IGetAllPayload {
+  toDoList: ToDoList;
+}
+
 interface IGetAllAction extends Action {
-  payload: ToDoList;
+  payload: IGetAllPayload;
 }
