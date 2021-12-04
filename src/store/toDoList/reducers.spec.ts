@@ -56,10 +56,7 @@ describe("to do list reducers", () => {
     );
   });
 
-  // TODO: 1) get all data 이후 리렌더링 기능 테스트 axios mocking 포함하여
-  // ㄴlocal back server 띄운채로 통과시킨후, O
-  // ㄴmock server 방법찾기 O
-  // TODo: script 수정, open하기 전에 yarn start, back dev server start
+  // TODO: action type 각 상태에 대해 다 정의를 해놔야할지?
   // TODO: 1) check 클릭했을때 기능 테스트
   // TODO: axios 응답 실패했을때 이후 로직
 });

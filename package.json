@@ -31,7 +31,7 @@
     "cy:run-ct": "cypress run-ct",
     "test:unit:open": "yarn cy:open-ct",
     "test:unit:run": "yarn cy:run-ct",
-    "test:unit": " yarn test:unit:run && yarn test:unit:open",
+    "test:unit": "yarn test:unit:run && yarn test:unit:open",
     "test:open": "yarn cy:open"
   },
   "eslintConfig": {
