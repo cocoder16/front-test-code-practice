@@ -51,7 +51,4 @@ describe("to do list reducers", () => {
 
     expect(reducer.getAll({ toDoList: [] }, action)).to.deep.equal(initialState);
   });
-
-  // TODO: axios 응답 실패했을때 이후 로직
-  //
 });

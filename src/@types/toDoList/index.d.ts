@@ -11,7 +11,7 @@ interface IToDoListState {
   toDoList: IToDoList;
 }
 
-interface Action {
+interface IAction {
   type?: string;
 }
 
@@ -20,7 +20,7 @@ interface IUpdateCheckedPayload {
   checked: boolean;
 }
 
-interface IUpdateCheckedAction extends Action {
+interface IUpdateCheckedAction extends IAction {
   payload: IUpdateCheckedPayload;
 }
 
@@ -28,6 +28,6 @@ interface IGetAllPayload {
   toDoList: ToDoList;
 }
 
-interface IGetAllAction extends Action {
+interface IGetAllAction extends IAction {
   payload: IGetAllPayload;
 }

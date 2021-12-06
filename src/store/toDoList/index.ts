@@ -1,22 +1,21 @@
-import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import service from "src/services/toDoList";
 
 const actionPrefix = "TO_DO_LIST";
 
 export const action = {
-  getAll: createAsyncThunk(`${actionPrefix}/GET_ALL`, async () => {
+  getAll: createAsyncThunk(`${actionPrefix}/GET_ALL`, async (_, { rejectWithValue }) => {
     // TODO: 이 패턴이 중복 되면 함수로 빼내서 유닛테스트와 함께 모듈화
-    const response = await service.getAll();
-    return response.data;
+    return service
+      .getAll()
+      .then(response => response.data)
+      .catch(error => rejectWithValue(error.response.data)); // rejectWithValue 로 하면 dispatch().unwrap().catch() 에서 받을 수 있다
   }),
-  updateChecked: createAsyncThunk(
-    `${actionPrefix}/UPDATE_CHECKED`,
-    async (payload: IUpdateCheckedPayload) => {
-      await service.updateChecked(payload);
-      return payload;
-    }
-  ),
+  updateChecked: createAsyncThunk(`${actionPrefix}/UPDATE_CHECKED`, async (payload: IUpdateCheckedPayload) => {
+    await service.updateChecked(payload);
+    return payload;
+  }),
 };
 
 const initialState: IToDoListState = {
@@ -29,8 +28,7 @@ export const reducer = {
     return state;
   },
   updateChecked: (state: IToDoListState, action: IUpdateCheckedAction) => {
-    state.toDoList.find((todo: ToDo) => todo.id === action.payload.id).checked =
-      action.payload.checked;
+    state.toDoList.find((todo: ToDo) => todo.id === action.payload.id).checked = action.payload.checked;
     return state;
   },
 };

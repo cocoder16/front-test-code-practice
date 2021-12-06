@@ -1,5 +1,5 @@
 const utilReducer = {
-  unknownType: (state: any, action: Action) => {
+  unknownType: (state: any, action: IAction) => {
     // 사이드 이팩트만이 존재하기에 유닛 테스트를 하지 않았음
     const isDevMode = process.env.NODE_ENV === "development";
 

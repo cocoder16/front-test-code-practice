@@ -181,3 +181,8 @@ and recommend that it be covered by testing the group of components (or whole ap
 (이상 준비)
 4. payload와 함께 action dispatch (실행), (중간에 API 통신 있을 수도) 스토어 업데이트 데이터값 확인 (단언), 리렌더링 확인(단언)
 5. 중간에 API 통신이 있는 경우는 위의 ajax 테스트를 액션생성 이후 API호출 단계에 넣어야함.
+
+*** catch 로직
+
+action.type === *.rejected -> reducer : 상태 데이터값 변경 담당
+컴포넌트단 dispatch.catch : UI 변경이나 리다이렉트 담당

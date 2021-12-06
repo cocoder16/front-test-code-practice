@@ -1,9 +1,14 @@
-import List from "src/domains/toDoList/list";
+import { Routes, Route } from "react-router-dom";
+
+import { ToDoList, NotFound } from "src/pages";
 
 function App() {
   return (
     <div className="App">
-      <List />
+      <Routes>
+        <Route path="/" element={<ToDoList />} />
+        <Route path="/error" element={<NotFound />} />
+      </Routes>
     </div>
   );
 }
