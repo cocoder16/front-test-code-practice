@@ -25,20 +25,16 @@ describe("to-do-list", () => {
   });
 
   it("send data and re-rendering when click checkbox", () => {
-    cy.intercept("PATCH", TO_DO_LIST.UPDATE_CHECKED, cy.spy().as("api")).as(
-      "updateChecked"
-    );
+    // check후 input render test는 unit test에서 원래 있었으나, 이 e2e 테스트 작성으로 인해 커버가 되므로 유닛테스트를 제거했음.
+    cy.intercept("PATCH", TO_DO_LIST.UPDATE_CHECKED, cy.spy().as("api")).as("updateChecked");
 
-    cy.get(".to-do-list .to-do-item:first")
-      .find("input")
-      .as("checkbox")
-      .click();
+    cy.get(".to-do-list .to-do-item:first").find("input").as("checkbox").click();
     // API request 1) 횟수 1회, 2) request data
     cy.wait("@updateChecked").then(interception => {
       const { request } = interception;
       expect(request.body).to.deep.equal({ id: 0, checked: true });
     });
-    cy.get("@api").its("callCount").should("equal", 1);
+    cy.get("@api").its("callCount").should("equal", 1); // 호출횟수는 여러 컴포넌트들의 라이프사이클에 맞물려서 틀어질 수 있으므로 unit이 아니라 e2e에서 한다.
 
     // checkbox value
     cy.get("@checkbox").should("be.checked");
