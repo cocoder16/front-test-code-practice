@@ -38,9 +38,7 @@ describe("to do list reducers", () => {
         },
       ],
     };
-    expect(reducer.updateChecked(initialState, action)).to.deep.equal(
-      expectedResult
-    );
+    expect(reducer.updateChecked(initialState, action)).to.deep.equal(expectedResult);
   });
 
   it("get all to-do-list data", () => {
@@ -51,10 +49,9 @@ describe("to do list reducers", () => {
       payload: { toDoList: initialState.toDoList }, // api response data
     };
 
-    expect(reducer.getAll({ toDoList: [] }, action)).to.deep.equal(
-      initialState
-    );
+    expect(reducer.getAll({ toDoList: [] }, action)).to.deep.equal(initialState);
   });
 
   // TODO: axios 응답 실패했을때 이후 로직
+  //
 });

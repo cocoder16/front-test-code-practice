@@ -32,7 +32,8 @@
     "test:unit:open": "yarn cy:open-ct",
     "test:unit:run": "yarn cy:run-ct",
     "test:unit": "yarn test:unit:run && yarn test:unit:open",
-    "test:open": "yarn cy:open"
+    "test:open": "yarn cy:open",
+    "husky:install": "husky install ./src/config/husky"
   },
   "eslintConfig": {
     "extends": [
@@ -58,6 +59,13 @@
     "@typescript-eslint/parser": "^5.5.0",
     "cypress": "^9.1.0",
     "eslint-plugin-chai-friendly": "^0.7.2",
-    "eslint-plugin-cypress": "^2.12.1"
+    "eslint-plugin-cypress": "^2.12.1",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
   }
 }
