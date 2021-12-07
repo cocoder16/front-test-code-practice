@@ -84,9 +84,5 @@ describe("to-do-list", () => {
       });
       cy.get(".to-do-list .to-do-item").should("have.length", 1);
     });
-
-    it("dummy test on workflow branch for PR", () => {
-      cy.get(".to-do-list");
-    });
   });
 });
