@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: CI
 
 on: [push, pull_request]
 
@@ -25,9 +25,6 @@ jobs:
           runTests: false
           build: yarn build
 
-      - name: Run unit test
-        run: yarn test:unit:run
-
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Run integration test
@@ -36,3 +33,6 @@ jobs:
           # Specify Browser since container image is compile with Firefox
           browser: firefox
           start: yarn start
+
+      - name: Run unit test
+        run: yarn test:unit:run
