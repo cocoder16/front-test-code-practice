@@ -31,6 +31,10 @@ export const reducer = {
     state.toDoList.find((todo: ToDo) => todo.id === action.payload.id).checked = action.payload.checked;
     return state;
   },
+  deleteToDo: (state: IToDoListState, action: IDeleteToDoAction) => {
+    state.toDoList = state.toDoList.filter((todo: ToDo) => todo.id !== action.payload.id);
+    return state;
+  },
 };
 
 const toDoListSlice = createSlice({

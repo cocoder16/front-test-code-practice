@@ -15,6 +15,14 @@ interface IAction {
   type?: string;
 }
 
+interface IGetAllPayload {
+  toDoList: ToDoList;
+}
+
+interface IGetAllAction extends IAction {
+  payload: IGetAllPayload;
+}
+
 interface IUpdateCheckedPayload {
   id: number;
   checked: boolean;
@@ -24,10 +32,10 @@ interface IUpdateCheckedAction extends IAction {
   payload: IUpdateCheckedPayload;
 }
 
-interface IGetAllPayload {
-  toDoList: ToDoList;
+interface IDeleteToDoPayload {
+  id: number;
 }
 
-interface IGetAllAction extends IAction {
-  payload: IGetAllPayload;
+interface IDeleteToDoAction extends IAction {
+  payload: IDeleteToDoPayload;
 }

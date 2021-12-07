@@ -1,6 +1,7 @@
 import { reducer } from ".";
+import { store } from "src/store";
 
-describe("to do list reducers", () => {
+describe("to-do-list reducers", () => {
   const initialState: IToDoListState = {
     toDoList: [
       {
@@ -18,7 +19,18 @@ describe("to do list reducers", () => {
     ],
   };
 
-  it("update to do check", () => {
+  it("get all to-do-list data", () => {
+    // !! redux-thunk가 포함된 action에 대한 reducer test
+    // - api mocking 해서 request와 response를 하는 것은 기능테스트에서 진행한다.
+    // - reducer function에 대한 unit test이므로 reducer function에 들어갈 action.payload값만 정해준다. 그 값은 api response data지만, api mocking은 여기서 하지 않는다.
+    const action: IGetAllAction = {
+      payload: { toDoList: initialState.toDoList }, // api response data
+    };
+
+    expect(reducer.getAll({ toDoList: [] }, action)).to.deep.equal(initialState);
+  });
+
+  it("update to-do check", () => {
     const action: IUpdateCheckedAction = {
       payload: { id: 0, checked: true },
     };
@@ -38,17 +50,25 @@ describe("to do list reducers", () => {
         },
       ],
     };
+
     expect(reducer.updateChecked(initialState, action)).to.deep.equal(expectedResult);
   });
 
-  it("get all to-do-list data", () => {
-    // !! redux-thunk가 포함된 action에 대한 reducer test
-    // - api mocking 해서 request와 response를 하는 것은 기능테스트에서 진행한다.
-    // - reducer function에 대한 unit test이므로 reducer function에 들어갈 action.payload값만 정해준다. 그 값은 api response data지만, api mocking은 여기서 하지 않는다.
-    const action: IGetAllAction = {
-      payload: { toDoList: initialState.toDoList }, // api response data
+  it("delete to-do", () => {
+    const action: IDeleteToDoAction = {
+      payload: { id: 0 },
+    };
+    const expectedResult: IToDoListState = {
+      toDoList: [
+        {
+          id: 1,
+          order: 1,
+          content: "study cypress",
+          checked: true,
+        },
+      ],
     };
 
-    expect(reducer.getAll({ toDoList: [] }, action)).to.deep.equal(initialState);
+    expect(reducer.deleteToDo(initialState, action)).to.deep.equal(expectedResult);
   });
 });
