@@ -5,7 +5,8 @@ on: [push]
 jobs:
   install:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node16.13.0-chrome87-ff82
+    # https://github.com/cypress-io/cypress-docker-images/blob/master/browsers/README.md
+    container: cypress/browsers:node16.5.0-chrome94-ff93
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -26,7 +27,7 @@ jobs:
 
   cypress-run:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node16.13.0-chrome87-ff82
+    container: cypress/browsers:node16.5.0-chrome94-ff93
     steps:
       - name: Checkout
         uses: actions/checkout@v2
