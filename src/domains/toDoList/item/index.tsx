@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 
 import StyledItem from "./Item.styled";
-import Input from "src/components/atoms/Input";
+import { Input, Button } from "src/components/atoms";
 import { action } from "src/store/toDoList";
 
 interface IProps {
@@ -21,6 +21,7 @@ function Item({ toDo }: IProps) {
       <div>{id}</div>
       <p>{content}</p>
       <Input type="checkbox" defaultChecked={checked} onChange={onChange} />
+      <Button>삭제</Button>
     </StyledItem>
   );
 }

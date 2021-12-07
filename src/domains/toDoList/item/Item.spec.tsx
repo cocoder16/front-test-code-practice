@@ -26,6 +26,7 @@ describe("Item component", () => {
     cy.get(".to-do-item").should("have.css", "border-top", "1px solid rgb(0, 0, 0)");
     cy.get("p").contains(props.content);
     cy.get("input[type='checkbox']").should("not.be.checked");
+    cy.get("button").contains("삭제");
   });
 
   it("render second order Item which don't have border-top and checked", () => {
