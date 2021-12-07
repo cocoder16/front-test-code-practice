@@ -84,5 +84,9 @@ describe("to-do-list", () => {
       });
       cy.get(".to-do-list .to-do-item").should("have.length", 1);
     });
+
+    it("dummy test for CI trigger", () => {
+      cy.get(".to-do-list");
+    });
   });
 });
