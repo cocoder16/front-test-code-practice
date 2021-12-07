@@ -33,7 +33,6 @@ describe("to-do-list", () => {
     });
     cy.intercept("PATCH", TO_DO_LIST.UPDATE_CHECKED).as("updateChecked");
 
-    // first item
     cy.get(".to-do-list .to-do-item:first").find("input").as("checkbox");
     cy.get("@checkbox").click();
     // API request 1) 횟수 1회, 2) request data
@@ -47,11 +46,9 @@ describe("to-do-list", () => {
     // checkbox value
     cy.get("@checkbox").should("be.checked");
 
-    // seciond item
-    cy.get(".to-do-list .to-do-item:last").find("input").as("secondCheckbox");
-    cy.get("@secondCheckbox").click();
+    cy.get("@checkbox").click();
     cy.wait("@updateChecked");
-    cy.get("@secondCheckbox").should("not.be.checked");
+    cy.get("@checkbox").should("not.be.checked");
   });
 
   it("render error message when fail to get initial to-do-list", () => {
