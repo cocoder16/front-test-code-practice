@@ -33,3 +33,6 @@ jobs:
           # Specify Browser since container image is compile with Firefox
           browser: firefox
           start: yarn start
+
+      - name: Cypress run unit
+        run: yarn test:unit:run
