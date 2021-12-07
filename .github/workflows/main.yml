@@ -3,40 +3,13 @@ name: Cypress Tests
 on: [push]
 
 jobs:
-  install:
+  cypress-run:
     runs-on: ubuntu-latest
     # https://github.com/cypress-io/cypress-docker-images/blob/master/browsers/README.md
     container: cypress/browsers:node16.5.0-chrome94-ff93
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Save build folder
-        uses: actions/upload-artifact@v2
-        with:
-          name: build
-          if-no-files-found: error
-          path: build
-
-      - name: Cypress install
-        uses: cypress-io/github-action@v2
-        with:
-          # Disable running of tests within install job
-          runTests: false
-          build: yarn build
-
-  cypress-run:
-    runs-on: ubuntu-latest
-    container: cypress/browsers:node16.5.0-chrome94-ff93
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Download the build folders
-        uses: actions/download-artifact@v2
-        with:
-          name: build
-          path: build
 
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
