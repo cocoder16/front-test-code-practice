@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.node-cache.outputs.cache-hit != 'true'
-        run: yarn
+        run: yarn && sudo npm install --unsafe-perm=true --allow-root cypress
 
       - name: Create env file
         shell: bash
@@ -46,7 +46,6 @@ jobs:
         with:
           # Disable running of tests within install job
           runTests: false
-          run: sudo npm install --unsafe-perm=true --allow-root cypress
           build: yarn build
 
   cypress-run:
