@@ -31,9 +31,11 @@ describe("to-do-list", () => {
         fixture: "api/responseData/toDoList/get.json",
       });
     });
-    cy.intercept("PATCH", TO_DO_LIST.UPDATE_CHECKED, cy.spy().as("api")).as("updateChecked");
+    cy.intercept("PATCH", TO_DO_LIST.UPDATE_CHECKED).as("updateChecked");
 
-    cy.get(".to-do-list .to-do-item:first").find("input").as("checkbox").click();
+    // first item
+    cy.get(".to-do-list .to-do-item:first").find("input").as("checkbox");
+    cy.get("@checkbox").click();
     // API request 1) 횟수 1회, 2) request data
     cy.wait("@updateChecked").then(interception => {
       const { request } = interception;
@@ -44,6 +46,12 @@ describe("to-do-list", () => {
 
     // checkbox value
     cy.get("@checkbox").should("be.checked");
+
+    // seciond item
+    cy.get(".to-do-list .to-do-item:last").find("input").as("secondCheckbox");
+    cy.get("@secondCheckbox").click();
+    cy.wait("@updateChecked");
+    cy.get("@secondCheckbox").should("not.be.checked");
   });
 
   it("render error message when fail to get initial to-do-list", () => {
@@ -59,7 +67,5 @@ describe("to-do-list", () => {
 
     // MUI toast 써야하지만, 귀찮아서 그냥 text rendering으로
     cy.get(".to-do-list").should("have.text", "fail to get data");
-    // cy.url().should("eq", HOST_URL + "/error");
-    // not found page에 어떤 문구가 렌더링 되는지는 유닛테스트에서 하므로 여기선 필요없음
   });
 });
