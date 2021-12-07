@@ -18,15 +18,15 @@ jobs:
           touch .env
           bash ./.github/workflows/scripts/env.sh
 
-      - name: Cypress run unit
-        run: yarn test:unit:run
-
       - name: Cypress install
         uses: cypress-io/github-action@v2
         with:
           # Disable running of tests within install job
           runTests: false
           build: yarn build
+
+      - name: Cypress run unit
+        run: yarn test:unit:run
 
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
