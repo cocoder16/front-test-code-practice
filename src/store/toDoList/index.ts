@@ -16,6 +16,10 @@ export const action = {
     await service.updateChecked(payload);
     return payload;
   }),
+  deleteToDo: createAsyncThunk(`${actionPrefix}/DELETE_TODO`, async (payload: IDeleteToDoPayload) => {
+    await service.deleteToDo(payload);
+    return payload;
+  }),
 };
 
 const initialState: IToDoListState = {
@@ -44,7 +48,8 @@ const toDoListSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(action.getAll.fulfilled, reducer.getAll)
-      .addCase(action.updateChecked.fulfilled, reducer.updateChecked);
+      .addCase(action.updateChecked.fulfilled, reducer.updateChecked)
+      .addCase(action.deleteToDo.fulfilled, reducer.deleteToDo);
   },
 });
 

@@ -16,6 +16,12 @@ const toDoList = {
       data: payload,
     });
   },
+  deleteToDo: (payload: IDeleteToDoPayload) => {
+    return axios({
+      method: "delete",
+      url: API_URL + TO_DO_LIST.DELETE.replace(":id", String(payload.id)),
+    });
+  },
 };
 
 export default toDoList;

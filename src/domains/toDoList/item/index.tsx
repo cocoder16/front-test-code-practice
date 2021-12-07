@@ -16,12 +16,16 @@ function Item({ toDo }: IProps) {
     dispatch(action.updateChecked({ id, checked: newChecked as boolean }));
   };
 
+  const onDeleteToDo = () => {
+    dispatch(action.deleteToDo({ id }));
+  };
+
   return (
     <StyledItem className="to-do-item" order={order}>
       <div>{id}</div>
       <p>{content}</p>
       <Input type="checkbox" defaultChecked={checked} onChange={onChange} />
-      <Button>삭제</Button>
+      <Button onClick={onDeleteToDo}>삭제</Button>
     </StyledItem>
   );
 }
