@@ -23,7 +23,10 @@ jobs:
 
       - name: Install dependencies
         if: steps.node-cache.outputs.cache-hit != 'true'
-        run: yarn && sudo npm install --unsafe-perm=true --allow-root cypress
+        run: yarn
+
+      - name: Cypress pre-install
+        run: sudo npm install --unsafe-perm=true --allow-root cypress
 
       - name: Create env file
         shell: bash
