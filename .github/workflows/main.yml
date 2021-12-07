@@ -1,9 +1,9 @@
-name: CI
+name: Cypress Tests
 
 on: [push, pull_request]
 
 jobs:
-  cypress CI:
+  cypress:
     runs-on: ubuntu-latest
     # https://github.com/cypress-io/cypress-docker-images/blob/master/browsers/README.md
     # container: cypress/browsers:node16.5.0-chrome94-ff93
@@ -27,7 +27,7 @@ jobs:
 
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
-      - name: Run integration test
+      - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
           # Specify Browser since container image is compile with Firefox
