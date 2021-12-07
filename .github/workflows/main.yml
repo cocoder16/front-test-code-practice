@@ -41,14 +41,8 @@ jobs:
           if-no-files-found: error
           path: build
 
-      - name: Cypress install
-        uses: cypress-io/github-action@v2
-        with:
-          # Disable running of tests within install job
-          runTests: false
-          build: yarn build
-
   cypress-run:
+    needs: install # install job이 수행된 뒤에 cypres-run job을 실행 (job은 병렬처리가 default)
     runs-on: ubuntu-latest
     container: cypress/base:16.13.0
     steps:
