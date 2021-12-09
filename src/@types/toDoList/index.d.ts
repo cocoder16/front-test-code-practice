@@ -15,6 +15,10 @@ interface IAction {
   type?: string;
 }
 
+interface IPostToDoRequestPayload {
+  content: string;
+}
+
 interface IPostToDoPayload {
   toDo: IToDo;
 }

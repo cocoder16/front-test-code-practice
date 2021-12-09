@@ -1,6 +1,8 @@
 import { Formik, Form } from "formik";
 import { useCallback } from "react";
 
+import StyledMyForm from "./MyForm.styled";
+
 interface IProps {
   id?: string;
   className?: string;
@@ -24,11 +26,11 @@ function MyForm({ id, className, initialValues, validationSchema, onSubmit, chil
   }, []);
 
   return (
-    <div id={id} className={className}>
+    <StyledMyForm id={id} className={className}>
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmitMiddleware}>
         <Form>{children}</Form>
       </Formik>
-    </div>
+    </StyledMyForm>
   );
 }
 

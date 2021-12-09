@@ -13,7 +13,7 @@ describe("to-do-list", () => {
       cy.visit(HOST_URL);
     });
 
-    it("render error message when fail to get initial to-do-list", () => {
+    it("Given fail to get initial to-do-list, Then render error message", () => {
       cy.intercept("GET", TO_DO_LIST.GET_ALL, req => {
         req.reply({
           statusCode: 400,
@@ -52,7 +52,25 @@ describe("to-do-list", () => {
       });
     });
 
-    it("send data and re-rendering when click checkbox", () => {
+    it("When type to-do and submit by enter key, Then post to-do and re-rendering", () => {
+      cy.intercept("POST", TO_DO_LIST.POST_TO_DO, request => {
+        request.reply({
+          fixture: "api/responseData/toDo/post.json",
+        });
+      }).as("postToDo");
+
+      cy.get(".to-do-list .to-do-item").should("have.length", 2);
+      cy.get("#to-do-field").as("toDoField").type("CI/CD").type("{enter}");
+      cy.get("@toDoField").should("have.value", "");
+      cy.get(".to-do-list .to-do-item").should($elements => {
+        expect($elements).to.have.length(3);
+        expect($elements.eq(0)).to.contain("0").to.contain("study test code");
+        expect($elements.eq(1)).to.contain("1").to.contain("study cypress");
+        expect($elements.eq(2)).to.contain("2").to.contain("CI/CD");
+      });
+    });
+
+    it("When click checkbox, Then send data and re-rendering", () => {
       // check후 input render test는 unit test에서 원래 있었으나, 이 e2e 테스트 작성으로 인해 커버가 되므로 유닛테스트를 제거했음.
       cy.intercept("PATCH", TO_DO_LIST.UPDATE_CHECKED, dummyReply).as("updateChecked");
 
@@ -63,7 +81,7 @@ describe("to-do-list", () => {
         const { request } = interception;
         expect(request.body).to.deep.equal({ id: 0, checked: true });
       });
-      // 호출횟수 테스트는 cypress의 retry기능때문에 하지 않는다.
+      // 호출횟수 테스트는 cypress의 retry기능때문에 하지 않았다.
       // cy.get("@api").its("callCount").should("equal", 1); // 호출횟수는 여러 컴포넌트들의 라이프사이클에 맞물려서 틀어질 수 있으므로 unit이 아니라 e2e에서 한다.
 
       // checkbox value
@@ -74,7 +92,7 @@ describe("to-do-list", () => {
       cy.get("@checkbox").should("not.be.checked");
     });
 
-    it("delete to-do when click button", () => {
+    it("When click button, Then delete to-do", () => {
       cy.intercept("DELETE", TO_DO_LIST.DELETE.replace(":id", "0"), dummyReply).as("deleteToDo");
 
       cy.get(".to-do-list .to-do-item:first").find("button").click();

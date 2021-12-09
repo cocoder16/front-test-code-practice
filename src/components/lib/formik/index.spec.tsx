@@ -79,6 +79,7 @@ describe("MyForm", () => {
     );
 
     // typing and enter
+    cy.get("#my-form").should("have.css", "border", "1px solid rgb(0, 0, 0)");
     cy.get("#to-do-field").should("have.attr", "placeholder", this.myFieldProps.placeholder).as("toDoField");
     cy.get("@toDoField").type(typedValue).should("have.value", typedValue);
     cy.get("@toDoField").type("{enter}");

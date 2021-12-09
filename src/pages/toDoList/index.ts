@@ -1,3 +1,3 @@
-import ToDoList from "src/domains/toDoList/list";
+import ToDoList from "src/domains/toDoList";
 
 export default ToDoList;

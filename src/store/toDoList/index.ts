@@ -5,6 +5,15 @@ import service from "src/services/toDoList";
 const actionPrefix = "TO_DO_LIST";
 
 export const action = {
+  postToDo: createAsyncThunk(
+    `${actionPrefix}/POST_TO_DO`,
+    async (payload: IPostToDoRequestPayload, { rejectWithValue }) => {
+      return service
+        .postToDo(payload)
+        .then(response => response.data)
+        .catch(error => rejectWithValue(error.response.data));
+    },
+  ),
   getAll: createAsyncThunk(`${actionPrefix}/GET_ALL`, async (_, { rejectWithValue }) => {
     // TODO: 이 패턴이 중복 되면 함수로 빼내서 유닛테스트와 함께 모듈화
     return service
@@ -51,6 +60,7 @@ const toDoListSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
+      .addCase(action.postToDo.fulfilled, reducer.postToDo)
       .addCase(action.getAll.fulfilled, reducer.getAll)
       .addCase(action.updateChecked.fulfilled, reducer.updateChecked)
       .addCase(action.deleteToDo.fulfilled, reducer.deleteToDo);
