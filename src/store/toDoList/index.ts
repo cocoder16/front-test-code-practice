@@ -27,6 +27,10 @@ const initialState: IToDoListState = {
 };
 
 export const reducer = {
+  postToDo: (state: IToDoListState, action: IPostToDoAction) => {
+    state.toDoList.push(action.payload.toDo);
+    return state;
+  },
   getAll: (state: IToDoListState, action: IGetAllAction) => {
     state.toDoList = action.payload.toDoList;
     return state;

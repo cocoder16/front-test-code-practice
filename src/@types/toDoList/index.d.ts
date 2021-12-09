@@ -15,6 +15,14 @@ interface IAction {
   type?: string;
 }
 
+interface IPostToDoPayload {
+  toDo: IToDo;
+}
+
+interface IPostToDoAction extends IAction {
+  payload: IPostToDoPayload;
+}
+
 interface IGetAllPayload {
   toDoList: ToDoList;
 }
