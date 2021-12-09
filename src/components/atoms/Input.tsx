@@ -1,21 +1,25 @@
 import { useRef } from "react";
 
-type IProps = {
+interface IProps {
   type: string;
+  id?: string;
   name?: string;
   className?: string;
+  placeholder?: string;
   maxLength?: number;
   autoFocus?: boolean;
   defaultValue?: string | number;
   defaultChecked?: boolean;
   onChange?: ({ newValue, newChecked }: InputChangeParameter) => void;
   onPressEnter?: () => void;
-};
+}
 
 function Input({
   type,
+  id,
   name,
   className,
+  placeholder,
   maxLength,
   autoFocus,
   defaultValue = "",
@@ -29,8 +33,10 @@ function Input({
   return (
     <input
       type={type}
+      id={id}
       name={name}
       className={className}
+      placeholder={placeholder}
       maxLength={maxLength}
       autoFocus={autoFocus}
       defaultValue={fixedDefaultValue}

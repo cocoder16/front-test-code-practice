@@ -1,10 +1,10 @@
 import React from "react";
 
-type IProps = {
+interface IProps {
   className?: string;
   onClick?: () => void;
   children?: React.ReactNode; // ReactNode allows multiple elements, strings, numbers, fragments, portals, …
-};
+}
 
 function Button({ className, onClick, children }: IProps) {
   return (
