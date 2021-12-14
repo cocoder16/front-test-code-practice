@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 
 import service from "src/services/toDoList";
 
@@ -54,17 +54,12 @@ export const reducer = {
   },
 };
 
-const toDoListSlice = createSlice({
-  name: "toDoList",
-  initialState,
-  reducers: {},
-  extraReducers: builder => {
-    builder
-      .addCase(action.postToDo.fulfilled, reducer.postToDo)
-      .addCase(action.getAll.fulfilled, reducer.getAll)
-      .addCase(action.updateChecked.fulfilled, reducer.updateChecked)
-      .addCase(action.deleteToDo.fulfilled, reducer.deleteToDo);
-  },
+const toDoListReducer = createReducer(initialState, builder => {
+  builder
+    .addCase(action.postToDo.fulfilled, reducer.postToDo)
+    .addCase(action.getAll.fulfilled, reducer.getAll)
+    .addCase(action.updateChecked.fulfilled, reducer.updateChecked)
+    .addCase(action.deleteToDo.fulfilled, reducer.deleteToDo);
 });
 
-export default toDoListSlice.reducer;
+export default toDoListReducer;
