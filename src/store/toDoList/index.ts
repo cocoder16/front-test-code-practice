@@ -45,14 +45,14 @@ export const reducer = {
     return state;
   },
   handleReject: (state: IToDoListState, action: any) => {
-    state.toDoList = [
-      {
-        id: 99,
-        order: 99,
-        content: "!!",
-        checked: true,
-      },
-    ];
+    // state.toDoList = [
+    //   {
+    //     id: 99,
+    //     order: 99,
+    //     content: "!!",
+    //     checked: true,
+    //   },
+    // ];
     // 실패한 요청에 대해서는 리덕스에서 딱히 처리해주고 싶은 로직이 없는데?
     // 뭐이런것도 가능은 함.
   },
