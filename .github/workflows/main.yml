@@ -13,6 +13,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Create env file
+        shell: bash
+        run: |
+          touch .env
+          bash ./.github/workflows/scripts/env.sh
+
       - name: Cypress install
         uses: cypress-io/github-action@v2
         with:
