@@ -5,18 +5,13 @@ on: [push, pull_request]
 jobs:
   cypress:
     runs-on: ubuntu-latest
+    environment: development
     # https://github.com/cypress-io/cypress-docker-images/blob/master/browsers/README.md
     # container: cypress/browsers:node16.5.0-chrome94-ff93
     # docker container들 다써봤는데 경로 권한 문제를 해결을 못해서 버림.
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Create env file
-        shell: bash
-        run: |
-          touch .env
-          bash ./.github/workflows/scripts/env.sh
 
       - name: Cypress install
         uses: cypress-io/github-action@v2
