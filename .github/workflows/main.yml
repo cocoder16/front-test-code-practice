@@ -19,7 +19,7 @@ jobs:
           bash ./.github/workflows/scripts/env.sh
         env:
           REACT_APP_HOST_URL: ${{ secrets.REACT_APP_HOST_URL }}
-          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_AI_URL }}
 
       - name: Cypress install
         uses: cypress-io/github-action@v2
