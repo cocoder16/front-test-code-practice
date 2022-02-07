@@ -62,8 +62,12 @@
   "devDependencies": {
     "@cypress/react": "^5.10.0",
     "@cypress/webpack-dev-server": "^1.6.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
     "@typescript-eslint/parser": "^5.5.0",
-    "cypress": "^9.1.0",
+    "cypress": "^9.4.1",
+    "cypress-watch-and-reload": "^1.7.3",
     "eslint-plugin-chai-friendly": "^0.7.2",
     "eslint-plugin-cypress": "^2.12.1",
     "husky": "^7.0.4",
@@ -72,6 +76,11 @@
   "lint-staged": {
     "*.{js,ts,tsx}": [
       "eslint --fix"
+    ]
+  },
+  "jest": {
+    "testMatch": [
+      "**/?(*.)+(test).[jt]s?(x)"
     ]
   }
 }

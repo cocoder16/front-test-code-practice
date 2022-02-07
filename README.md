@@ -16,3 +16,31 @@ https://kdata.or.kr/info/info_04_view.html?field=&keyword=&type=techreport&page=
 
 깃허브 레파지토리 settings - secrets - actions 에서 레파지토리 secret 추가하여 환경변수 추가
 workflows 코드보면, 이것을 사용할 수 있음
+
+# cypress vs jest 유닛테스트 비교
+
+1. jest - react testing library 나 enzyme을 같이 써야 편함(사실상 써야함)
+2. cypress - 자체적으로 mocha등 다 포함되어있음
+
+### 런타임
+
+비슷
+
+### watch-all & hot reload
+
+```
+# watch & test re-run이 왜 중요한지?
+TDD 에서는 실패하는 테스트 코드를 먼저 작성하고 그다음에 어플리케이션 코드를 작성한다.
+어플리케이션을 작성하고 바로 결과를 확인하려면 이 기능이 있는게 편하다
+```
+
+- cypres는 플러그인 쓰면 지원
+- jest는 지원
+
+### 빌드타임
+
+cypress 빌드 오래걸림, open-ct쓰면 평소엔 문제 없긴한데 run-ct 오래걸리는건 생각해야함
+
+### 코드
+
+cypress가 훨씬 깨끗하고 사용하기도 쉬움

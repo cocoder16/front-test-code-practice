@@ -3,5 +3,8 @@
   "component": {
     "componentFolder": "src",
     "testFiles": ["**/*.spec.tsx", "**/*.spec.ts"]
+  },
+  "cypress-watch-and-reload": {
+    "watch": ["src/*"]
   }
 }
