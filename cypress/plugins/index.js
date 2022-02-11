@@ -31,10 +31,12 @@ module.exports = (on, config) => {
     require("@cypress/react/plugins/react-scripts")(on, config);
   }
 
-  if (config.testingType === "e2e" && config.env.npm_lifecycle_event === "cy:open") {
+  const npmLifecycleEvent = config.env.npm_lifecycle_event;
+
+  if (npmLifecycleEvent === "cy:open-ct" || npmLifecycleEvent === "cy:open") {
     // cypress open은 test file이 변경되면 테스트를 rerun하는데 application file이 변경되면 테스트를 rerun하지 않음.
     // application code가 변경될 때도 테스트를 rerun 해주는 플러그인임.
-    // 이거 포트가 정해진 값만 써서, open으로 켜놓고 있으면 다른 유닛테스트나 cy:run 할 때, 포트 충돌 에러나므로 조건문 처리
+    // 이거 포트가 정해진 값만 써서, open으로 켜놓고 있으면 cy:run 이나 cy:run-ct 할 때, 포트 충돌 에러나므로 조건문 처리
     require("cypress-watch-and-reload/plugins")(config);
   }
 
