@@ -55,7 +55,9 @@ describe("to-do-list reducers", () => {
       ],
     };
 
-    expect(reducer.postToDo(this.initialState, action)).to.deep.equal(expectedResult);
+    reducer.postToDo(this.initialState, action);
+
+    expect(this.initialState).to.deep.equal(expectedResult);
   });
 
   it("get all to-do-list data", function () {
@@ -65,8 +67,11 @@ describe("to-do-list reducers", () => {
     const action: IGetAllAction = {
       payload: { toDoList: this.initialState.toDoList }, // api response data
     };
+    const initialState = { toDoList: [] };
 
-    expect(reducer.getAll({ toDoList: [] }, action)).to.deep.equal(this.initialState);
+    reducer.getAll(initialState, action);
+
+    expect(initialState).to.deep.equal(this.initialState);
   });
 
   it("update to-do check", function () {
@@ -90,7 +95,9 @@ describe("to-do-list reducers", () => {
       ],
     };
 
-    expect(reducer.updateChecked(this.initialState, action)).to.deep.equal(expectedResult);
+    reducer.updateChecked(this.initialState, action);
+
+    expect(this.initialState).to.deep.equal(expectedResult);
   });
 
   it("delete to-do", function () {
@@ -108,6 +115,8 @@ describe("to-do-list reducers", () => {
       ],
     };
 
-    expect(reducer.deleteToDo(this.initialState, action)).to.deep.equal(expectedResult);
+    reducer.deleteToDo(this.initialState, action);
+
+    expect(this.initialState).to.deep.equal(expectedResult);
   });
 });

@@ -38,11 +38,9 @@ const initialState: IToDoListState = {
 export const reducer = {
   postToDo: (state: IToDoListState, action: IPostToDoAction) => {
     state.toDoList.push(action.payload.toDo);
-    return state;
   },
   getAll: (state: IToDoListState, action: IGetAllAction) => {
     state.toDoList = action.payload.toDoList;
-    return state;
   },
   handleReject: (state: IToDoListState, action: any) => {
     // state.toDoList = [
@@ -58,11 +56,9 @@ export const reducer = {
   },
   updateChecked: (state: IToDoListState, action: IUpdateCheckedAction) => {
     state.toDoList.find((todo: ToDo) => todo.id === action.payload.id).checked = action.payload.checked;
-    return state;
   },
   deleteToDo: (state: IToDoListState, action: IDeleteToDoAction) => {
     state.toDoList = state.toDoList.filter((todo: ToDo) => todo.id !== action.payload.id);
-    return state;
   },
 };
 
