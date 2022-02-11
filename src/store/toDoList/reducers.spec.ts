@@ -1,8 +1,12 @@
 import { reducer } from ".";
 
 describe("to-do-list reducers", () => {
-  beforeEach(function () {
-    const initialState: IToDoListState = {
+  let state: IToDoListState = {
+    toDoList: [],
+  };
+
+  beforeEach(() => {
+    state = {
       toDoList: [
         {
           id: 0,
@@ -18,10 +22,9 @@ describe("to-do-list reducers", () => {
         },
       ],
     };
-    this.initialState = initialState;
   });
 
-  it("post to-do", function () {
+  it("post to-do", () => {
     const action: IPostToDoAction = {
       payload: {
         toDo: {
@@ -32,7 +35,7 @@ describe("to-do-list reducers", () => {
         },
       },
     };
-    const expectedResult: IToDoListState = {
+    const expectedState: IToDoListState = {
       toDoList: [
         {
           id: 0,
@@ -55,30 +58,30 @@ describe("to-do-list reducers", () => {
       ],
     };
 
-    reducer.postToDo(this.initialState, action);
+    reducer.postToDo(state, action);
 
-    expect(this.initialState).to.deep.equal(expectedResult);
+    expect(state).to.deep.equal(expectedState);
   });
 
-  it("get all to-do-list data", function () {
+  it("get all to-do-list data", () => {
     // !! redux-thunk가 포함된 action에 대한 reducer test
     // - api mocking 해서 request와 response를 하는 것은 기능테스트에서 진행한다.
     // - reducer function에 대한 unit test이므로 reducer function에 들어갈 action.payload값만 정해준다. 그 값은 api response data지만, api mocking은 여기서 하지 않는다.
     const action: IGetAllAction = {
-      payload: { toDoList: this.initialState.toDoList }, // api response data
+      payload: { toDoList: state.toDoList }, // api response data
     };
-    const initialState = { toDoList: [] };
+    const initialState: IToDoListState = { toDoList: [] };
 
     reducer.getAll(initialState, action);
 
-    expect(initialState).to.deep.equal(this.initialState);
+    expect(initialState).to.deep.equal(state);
   });
 
-  it("update to-do check", function () {
+  it("update to-do check", () => {
     const action: IUpdateCheckedAction = {
       payload: { id: 0, checked: true },
     };
-    const expectedResult: IToDoListState = {
+    const expectedState: IToDoListState = {
       toDoList: [
         {
           id: 0,
@@ -95,16 +98,16 @@ describe("to-do-list reducers", () => {
       ],
     };
 
-    reducer.updateChecked(this.initialState, action);
+    reducer.updateChecked(state, action);
 
-    expect(this.initialState).to.deep.equal(expectedResult);
+    expect(state).to.deep.equal(expectedState);
   });
 
-  it("delete to-do", function () {
+  it("delete to-do", () => {
     const action: IDeleteToDoAction = {
       payload: { id: 0 },
     };
-    const expectedResult: IToDoListState = {
+    const expectedState: IToDoListState = {
       toDoList: [
         {
           id: 1,
@@ -115,8 +118,8 @@ describe("to-do-list reducers", () => {
       ],
     };
 
-    reducer.deleteToDo(this.initialState, action);
+    reducer.deleteToDo(state, action);
 
-    expect(this.initialState).to.deep.equal(expectedResult);
+    expect(state).to.deep.equal(expectedState);
   });
 });

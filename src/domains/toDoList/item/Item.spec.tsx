@@ -5,7 +5,7 @@ import Item from ".";
 import { store } from "src/store";
 
 describe("Item component", () => {
-  const mountItem = (props: ToDo) => {
+  const setUp = (props: ToDo) => {
     mount(
       <Provider store={store}>
         <Item toDo={props} />
@@ -21,12 +21,12 @@ describe("Item component", () => {
       checked: false,
     };
 
-    mountItem(props);
+    setUp(props);
 
     cy.get(".to-do-item").should("have.css", "border-top", "1px solid rgb(0, 0, 0)");
-    cy.get("p").contains(props.content);
+    cy.get("p").contains(props.content).should("exist");
     cy.get("input[type='checkbox']").should("not.be.checked");
-    cy.get("button").contains("삭제");
+    cy.get("button").contains("삭제").should("exist");
   });
 
   it("render second order Item which don't have border-top and checked", () => {
@@ -37,7 +37,7 @@ describe("Item component", () => {
       checked: true,
     };
 
-    mountItem(props);
+    setUp(props);
 
     cy.get(".to-do-item").should("have.css", "border-top", "0px none rgb(0, 0, 0)");
     cy.get("input[type='checkbox']").should("be.checked");

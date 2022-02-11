@@ -60,7 +60,9 @@ describe("to-do-list", () => {
       }).as("postToDo");
 
       cy.get(".to-do-list .to-do-item").should("have.length", 2);
+
       cy.get("#to-do-field").as("toDoField").type("CI/CD").type("{enter}");
+
       cy.get("@toDoField").should("have.value", "");
       cy.get(".to-do-list .to-do-item").should($elements => {
         expect($elements).to.have.length(3);
@@ -76,6 +78,7 @@ describe("to-do-list", () => {
 
       cy.get(".to-do-list .to-do-item:first").find("input").as("checkbox");
       cy.get("@checkbox").click();
+
       // API request 1) 횟수 1회, 2) request data
       cy.wait("@updateChecked").then(interception => {
         const { request } = interception;
@@ -89,6 +92,7 @@ describe("to-do-list", () => {
 
       cy.get("@checkbox").click();
       cy.wait("@updateChecked");
+
       cy.get("@checkbox").should("not.be.checked");
     });
 
@@ -98,6 +102,7 @@ describe("to-do-list", () => {
       cy.get(".to-do-list .to-do-item:first").find("button").click();
       cy.wait("@deleteToDo").then(interception => {
         const { request } = interception;
+
         expect(request.url).contain("/toDo/0");
       });
       cy.get(".to-do-list .to-do-item").should("have.length", 1);

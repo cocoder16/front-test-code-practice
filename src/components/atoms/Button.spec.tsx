@@ -8,6 +8,7 @@ describe("Button Interface", () => {
     mount(<Button onClick={onClick}>Test button</Button>);
 
     cy.get("button").contains("Test button").click();
+
     cy.get("@clickHandler").should("have.been.calledOnce");
   });
 });
