@@ -1,5 +1,6 @@
 import { expect, jest } from "@jest/globals";
 import { fireEvent, render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 import Button from "./Button";
 
@@ -11,7 +12,8 @@ describe("Button Interface", () => {
 
     expect(button).toBeTruthy();
 
-    fireEvent.click(button);
+    // fireEvent.click(button);
+    userEvent.click(button);
 
     expect(onClick).toHaveBeenCalledTimes(1);
   });
