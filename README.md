@@ -19,7 +19,7 @@ workflows 코드보면, 이것을 사용할 수 있음
 
 # cypress vs jest 유닛테스트 비교
 
-1. jest - react testing library 나 enzyme을 같이 써야 편함(사실상 써야함)
+1. jest - react testing library 나 enzyme을 같이 써야 편함
 2. cypress - 자체적으로 mocha등 다 포함되어있음
 
 ### 런타임
@@ -43,4 +43,5 @@ cypress 빌드 오래걸림, open-ct쓰면 평소엔 문제 없긴한데 run-ct 
 
 ### 코드
 
-cypress가 훨씬 깨끗하고 사용하기도 쉬움
+- cypress가 훨씬 깨끗하고 사용하기도 쉬움
+- react-testing-library는 uncontrolled component는 이벤트 액션 이후 단언을 테스트할 수 없다. enzyme는 안해봐서 모르겠다. cypress는 uncontrolled component에 대해서도 테스트가 가능하다.

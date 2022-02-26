@@ -25,9 +25,13 @@ describe("Input Interface", () => {
     expect(input.focus).toBeTruthy();
     expect(input).toHaveAttribute("value", props.defaultValue);
 
-    // fireEvent, userEvent 아무것도 안먹힘
-    fireEvent.change(input, { target: { value: appendedText } });
-    // userEvent.type(input, appendedText + "{enter}");
+    // 현상:fireEvent, userEvent 아무것도 안먹힘
+    // 원인: 컴포넌트가 내부에서 state로 값을 관리해야 변경된 값을 인지하여 통과가 가능. html태그 자체 스팩으로 변경된거는 이걸로 테스트가 안됨
+    // => 즉 controlled component만 테스트할 수 있다. 이것은 리액트 공식문서 권고이기도 하다.
+    // 이 input atom은 input html tag를 참조만하는 uncontrolled component이므로 테스트를 못하는 것이다.
+
+    // fireEvent.change(input, { target: { value: appendedText } });
+    userEvent.type(input, appendedText + "{enter}");
 
     expect(input).toHaveAttribute("value", expectedText);
     expect(input).not.toHaveAttribute("value", fullText);
@@ -38,132 +42,4 @@ describe("Input Interface", () => {
     });
     expect(props.onPressEnter).toBeCalledTimes(expectedCallCountOfEnter);
   });
-  // it("radio type Input", () => {
-  //   const props = {
-  //     type: "radio",
-  //     name: "select",
-  //     defaultValue: "abc",
-  //     defaultChecked: false,
-  //     onChange: cy.stub().as("changeHandler"),
-  //   };
-  //   mount(
-  //     <Input
-  //       type={props.type}
-  //       name={props.name}
-  //       defaultValue={props.defaultValue}
-  //       defaultChecked={props.defaultChecked}
-  //       onChange={props.onChange}
-  //     />,
-  //   );
-  //   cy.get("input").should("have.value", props.defaultValue).and("not.be.checked");
-  //   cy.get("input").check().should("be.checked");
-  //   cy.get("@changeHandler").should("have.callCount", 1).and("have.been.calledWith", {
-  //     newValue: props.defaultValue,
-  //     newChecked: true,
-  //   });
-  //   cy.get("input").click().should("be.checked");
-  //   cy.get("@changeHandler").should("have.callCount", 1).and("have.been.calledWith", {
-  //     newValue: props.defaultValue,
-  //     newChecked: true,
-  //   });
-  // });
-  // it("checkbox type Input", () => {
-  //   const props = {
-  //     type: "checkbox",
-  //     name: "select",
-  //     defaultValue: "abc",
-  //     defaultChecked: false,
-  //     onChange: cy.stub().as("changeHandler"),
-  //   };
-  //   mount(
-  //     <Input
-  //       type={props.type}
-  //       name={props.name}
-  //       defaultValue={props.defaultValue}
-  //       defaultChecked={props.defaultChecked}
-  //       onChange={props.onChange}
-  //     />,
-  //   );
-  //   cy.get("input").should("have.value", props.defaultValue).and("not.be.checked");
-  //   cy.get("input").check().should("be.checked");
-  //   cy.get("@changeHandler").should("have.callCount", 1).and("have.been.calledWith", {
-  //     newValue: props.defaultValue,
-  //     newChecked: true,
-  //   });
-  //   cy.get("input").click().should("not.be.checked");
-  //   cy.get("@changeHandler").should("have.callCount", 2).and("have.been.calledWith", {
-  //     newValue: props.defaultValue,
-  //     newChecked: false,
-  //   });
-  // });
-  // it("number type Input", () => {
-  //   const props = {
-  //     type: "number",
-  //     maxLength: 5,
-  //     autoFocus: true,
-  //     defaultValue: "",
-  //     onChange: cy.stub().as("changeHandler"),
-  //     onPressEnter: cy.stub().as("pressEnterHandler"),
-  //   };
-  //   const appendedNumber = "123456";
-  //   const expectedNumber = appendedNumber.slice(0, props.maxLength);
-  //   const expectedChangeCount = expectedNumber.length - props.defaultValue.length;
-  //   const expectedCallCountOfEnter = 1;
-  //   mount(
-  //     <Input
-  //       type={props.type}
-  //       maxLength={props.maxLength}
-  //       autoFocus={props.autoFocus}
-  //       defaultValue={props.defaultValue}
-  //       onChange={props.onChange}
-  //       onPressEnter={props.onPressEnter}
-  //     />,
-  //   );
-  //   cy.get("input").should("be.focused").and("have.value", props.defaultValue);
-  //   cy.get("input")
-  //     .type(appendedNumber)
-  //     .type("{enter}")
-  //     .should("have.value", expectedNumber)
-  //     .and("not.have.value", appendedNumber);
-  //   cy.get("@changeHandler").should("have.callCount", expectedChangeCount).and("have.been.calledWith", {
-  //     newValue: expectedNumber,
-  //     newChecked: false,
-  //   });
-  //   cy.get("@pressEnterHandler").should("have.callCount", expectedCallCountOfEnter);
-  // });
-  // it("password type Input", () => {
-  //   const props = {
-  //     type: "password",
-  //     maxLength: 10,
-  //     onChange: cy.stub().as("changeHandler"),
-  //     onPressEnter: cy.stub().as("pressEnterHandler"),
-  //   };
-  //   const password = "abcd1234!@#";
-  //   const slicedPassword = password.slice(0, props.maxLength);
-  //   const expectedCallCountOfEnter = 1;
-  //   mount(
-  //     <Input
-  //       type={props.type}
-  //       maxLength={props.maxLength}
-  //       onChange={props.onChange}
-  //       onPressEnter={props.onPressEnter}
-  //     />,
-  //   );
-  //   cy.get("input").and("have.value", "");
-  //   cy.get("input").type(password).type("{enter}").should("have.value", slicedPassword).and("not.have.value", password);
-  //   cy.get("@changeHandler").should("have.callCount", slicedPassword.length).and("have.been.calledWith", {
-  //     newValue: slicedPassword,
-  //     newChecked: false,
-  //   });
-  //   cy.get("@pressEnterHandler").should("have.callCount", expectedCallCountOfEnter);
-  // });
-  // it("color type Input", () => {
-  //   const props = {
-  //     type: "color",
-  //     // defaultValue, => if want, test this
-  //   };
-  //   const defaultColorInputValue = "#000000";
-  //   mount(<Input type={props.type} />);
-  //   cy.get("input").should("have.value", defaultColorInputValue);
-  // });
 });
